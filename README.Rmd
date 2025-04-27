@@ -1,7 +1,15 @@
+---
+title: "medsenssurv"
+output:
+  rmarkdown::github_document:
+    toc: false       # 如果不需要目录可以关掉
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# medsurvsens
+
+
+# medsenssurv
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -10,8 +18,7 @@ The goal of medsenssurv is to perform sensitivity analysis for unmeasured confou
 
 ## Installation
 
-You can install the development version of medsenssurv from
-[GitHub](https://github.com/) with:
+You can install the development version of medsenssurv from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -20,12 +27,13 @@ devtools::install_github("Guo-yi-y/medsenssurv")
 
 ## Example
 
-This is a basic example which shows you how to perform this sensitivity analysis on a simulated dataset.
-This will generate a list containing data frame of sensitivity analysis and 3D scatter plot
+This is a basic example which shows you how to perform this sensitivity analysis on a simulated dataset. This will generate a list containing data frame of sensitivity analysis and 3D scatter plot
 
-``` r
+```{r example}
 library(medsenssurv)
+library(dplyr)
 library(coxed)
+library(htmlwidgets)
 set.seed(123)
 data_pas = data.frame(covx1 = rnorm(100), covx2 = rnorm(100), U = rbinom(100, 1, 0.5)) %>%
   mutate(
@@ -45,12 +53,13 @@ survsens_res <- medsurvsens(surv_data, outcome = "failed", time = "y", m = "m", 
                        range.b.y = c(-1, 1), range.b.m = c(-1, 1), range.b.t = c(-1, 1), parallel = T, B=100)
 ```
 
-Generated 3D scatter plot can't be viewed in R.
-You can save it as a html object and open it with browser on your computer
+Generated 3D scatter plot can’t be viewed in R. You can save it as a html object and open it with browser on your computer
 
-``` r
-saveWidget(sens_res$p_nie, file = "nie.html", selfcontained = TRUE)
-saveWidget(sens_res$p_nde, file = "nde.html", selfcontained = TRUE)
+```{r plot}
+saveWidget(survsens_res$p_nie, file = "nie.html", selfcontained = TRUE)
+saveWidget(survsens_res$p_nde, file = "nde.html", selfcontained = TRUE)
 ```
-You can also save the data frame into your computer and upload it to "http://127.0.0.1:5000/test" 
+
+You can also save the data frame into your computer and upload it to “http://127.0.0.1:5000/test” 
+
 Reference
