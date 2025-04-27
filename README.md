@@ -30,66 +30,8 @@ data frame of sensitivity analysis and 3D scatter plot
 ``` r
 library(medsenssurv)
 library(dplyr)
-```
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-``` r
 library(coxed)
-```
-
-    ## Warning: package 'coxed' was built under R version 4.4.2
-
-    ## Loading required package: rms
-
-    ## Warning: package 'rms' was built under R version 4.4.2
-
-    ## Loading required package: Hmisc
-
-    ## Warning: package 'Hmisc' was built under R version 4.4.2
-
-    ## 
-    ## Attaching package: 'Hmisc'
-
-    ## The following objects are masked from 'package:dplyr':
-    ## 
-    ##     src, summarize
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     format.pval, units
-
-    ## Loading required package: survival
-
-    ## Loading required package: mgcv
-
-    ## Loading required package: nlme
-
-    ## 
-    ## Attaching package: 'nlme'
-
-    ## The following object is masked from 'package:dplyr':
-    ## 
-    ##     collapse
-
-    ## This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.
-
-``` r
 library(htmlwidgets)
-```
-
-    ## Warning: package 'htmlwidgets' was built under R version 4.4.1
-
-``` r
 set.seed(123)
 data_pas = data.frame(covx1 = rnorm(100), covx2 = rnorm(100), U = rbinom(100, 1, 0.5)) %>%
   mutate(

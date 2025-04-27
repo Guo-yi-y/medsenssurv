@@ -5,6 +5,14 @@ output:
     toc: false       # 如果不需要目录可以关掉
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  eval    = FALSE,  # 不运行任何代码
+  warning = FALSE,  # 隐藏所有警告
+  message = FALSE   # 隐藏所有消息
+)
+```
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
@@ -24,7 +32,6 @@ You can install the development version of medsenssurv from [GitHub](https://git
 # install.packages("devtools")
 devtools::install_github("Guo-yi-y/medsenssurv")
 ```
-
 ## Example
 
 This is a basic example which shows you how to perform this sensitivity analysis on a simulated dataset. This will generate a list containing data frame of sensitivity analysis and 3D scatter plot
