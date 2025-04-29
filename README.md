@@ -60,6 +60,6 @@ saveWidget(survsens_res$p_nde, file = "nde.html", selfcontained = TRUE)
 ```
 
 You can also save the data frame into your computer and upload it to
-“<http://127.0.0.1:5000/test>”
+“<http://47.98.118.19>”
 
 Reference
