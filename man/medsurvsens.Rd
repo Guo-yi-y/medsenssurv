@@ -15,13 +15,17 @@ medsurvsens(
   covariates,
   scale.m,
   scale.t,
+  scale.u,
+  sigma.u = 1,
+  lower_u = -10,
+  upper_u = 10,
   range.b.y,
   range.b.m,
   range.b.t,
   ngrid = 10,
   iter_num = 20,
   multiple_draw = F,
-  R = 5,
+  R = 1,
   B = 100,
   parallel = F
 )
@@ -43,7 +47,11 @@ medsurvsens(
 
 \item{covariates}{the vector of covariates}
 
-\item{scale.m, scale.t}{scale of mediator and exposure, binary or continuous}
+\item{scale.m, scale.t, scale.u}{scale of mediator, exposure and U, binary or continuous}
+
+\item{sigma.u}{The standard deviation of the prior distribution of U if it is continuous. The default is 1.}
+
+\item{lower_u, upper_u}{lower and upper bound of the integration interval for U if it is continuous.}
 
 \item{range.b.y, range.b.m, range.b.t}{the range of coefficients between U and exposure, mediator, and survival outcome}
 

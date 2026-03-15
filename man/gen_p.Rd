@@ -7,7 +7,7 @@
 gen_p(
   data,
   inter = FALSE,
-  p.U,
+  p.U = 0.5,
   outcome,
   time,
   m,
@@ -18,7 +18,11 @@ gen_p(
   b.t,
   scale.m,
   scale.t,
-  iter_num = 20
+  scale.u,
+  sigma.u = 1,
+  iter_num = 20,
+  lower_u = -10,
+  upper_u = 10
 )
 }
 \arguments{
@@ -40,12 +44,16 @@ gen_p(
 
 \item{b.y, b.m, b.t}{the coefficients between U and exposure, mediator, and survival outcome}
 
-\item{scale.m, scale.t}{scale of mediator and exposure, binary or continuous}
+\item{scale.m, scale.t, scale.u}{scale of mediator, exposure and U, binary or continuous}
+
+\item{sigma.u}{The standard deviation of the prior distribution of U if it is continuous. The default is 1.}
 
 \item{iter_num}{number of iteration}
+
+\item{lower_u, upper_u}{lower and upper bound of the integration interval for U if it is continuous.}
 }
 \value{
-conditional probability of U
+U and its conditional probability (if U is binary)
 }
 \description{
 generate conditional probability of U
