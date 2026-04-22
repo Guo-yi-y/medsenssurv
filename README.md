@@ -174,3 +174,7 @@ You can also save the data frame into your computer and upload it to
 “<http://47.98.118.19>”
 
 Reference
+
+Guo Y, Chen D, Xu X, Zhang Z, Wen Y, Zheng X, Wu Z, Qin X. Sensitivity
+Analysis for Unmeasured Confounding in Causal Mediation Analysis With
+Survival Outcome. Stat Med. 2026 Apr;45(8-9):e70548.
