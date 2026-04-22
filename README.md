@@ -32,6 +32,7 @@ library(medsenssurv)
 library(dplyr)
 library(coxed)
 library(htmlwidgets)
+library(plotly)
 set.seed(123)
 data_pas = data.frame(covx1 = rnorm(100), covx2 = rnorm(100), U = rbinom(100, 1, 0.5)) %>%
   mutate(
@@ -57,6 +58,116 @@ html object and open it with browser on your computer
 ``` r
 saveWidget(survsens_res$p_nie, file = "nie.html", selfcontained = TRUE)
 saveWidget(survsens_res$p_nde, file = "nde.html", selfcontained = TRUE)
+```
+
+In the 3D plot, other covariates can be used as benchmarks to help
+assess the strength of U. Here, we provide an example including covx1,
+covx2, and twice their corresponding values. In practical applications,
+you can add benchmark points according to your own needs.
+
+``` r
+covar_df = data.frame(covar = c("covx1", "covx2"), x_coef = c(0.1, 0.1), m_coef = c(0.05, 0.3), y_coef = c(0.1, 0.2))
+
+covar_df2 = data.frame(covar = c( "2*covx1", "2*covx2"), x_coef = c(0.2, 0.2), m_coef = c( 0.1, 0.6), y_coef = c(0.2, 0.4))
+
+p_nie_with_covar = survsens_res$p_nie %>%
+  add_trace(
+    data = covar_df,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "markers",
+    marker = list(size = 3, color = "black"),
+    showlegend = FALSE
+  ) %>%
+  add_trace(
+    data = covar_df,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "text",
+    text = ~covar,
+    textfont = list(color = "black", size = 13),
+    showlegend = FALSE,
+    inherit = FALSE
+  )%>%
+  add_trace(
+    data = covar_df2,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "markers",
+    marker = list(size = 3, color = "blue"),
+    showlegend = FALSE
+  ) %>%
+  add_trace(
+    data = covar_df2,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "text",
+    text = ~covar,
+    textfont = list(color = "black", size = 13),
+    showlegend = FALSE,
+    inherit = FALSE
+  )
+
+
+p_nde_with_covar = survsens_res$p_nde %>%
+  add_trace(
+    data = covar_df,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "markers",
+    marker = list(size = 3, color = "blue"),
+    showlegend = FALSE
+  ) %>%
+  add_trace(
+    data = covar_df,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "text",
+    text = ~covar,
+    textfont = list(color = "black", size = 13),
+    showlegend = FALSE,
+    inherit = FALSE
+  )%>%
+  add_trace(
+    data = covar_df,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "markers",
+    marker = list(size = 3, color = "black"),
+    showlegend = FALSE
+  ) %>%
+  add_trace(
+    data = covar_df,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "text",
+    text = ~covar,
+    textfont = list(color = "black", size = 13),
+    showlegend = FALSE,
+    inherit = FALSE
+  )%>%
+  add_trace(
+    data = covar_df2,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "markers",
+    marker = list(size = 3, color = "blue"),
+    showlegend = FALSE
+  ) %>%
+  add_trace(
+    data = covar_df2,
+    x = ~m_coef, y = ~y_coef, z = ~x_coef,
+    type = "scatter3d",
+    mode = "text",
+    text = ~covar,
+    textfont = list(color = "black", size = 13),
+    showlegend = FALSE,
+    inherit = FALSE
+  )
+
+
+saveWidget(p_nie_with_covar, file = "nie_with_covar.html", selfcontained = TRUE)
+saveWidget(p_nde_with_covar, file = "nde_with_covar.html", selfcontained = TRUE)
 ```
 
 ## Reference
